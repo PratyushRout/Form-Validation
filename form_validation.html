@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 130%;
+    }
+
+    input{
+        padding: 5px 3px 8px 5px;
+        font-size: 25px;
+        border-radius: 5px;
+        border: 1px solid grey;
+    }
+
+    label{
+        position: relative;
+        top: 12px;
+        width: 200px;
+        float: left;
+    }
+
+    #wrapper{
+        width: 550px;
+        margin: auto;
+    }
+
+    .formele{
+        margin-bottom: 10px;
+    }
+
+    #submitButton{
+        width: 130px;
+        margin-left: 200px;
+        color: teal;
+        background-color: powderblue;
+        border: 1px solid teal;
+    }
+</style>
+
+<body>
+    <div id="wrapper"></div>
+        <div id="errorMessage">
+        <div class="formele">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="Eg. yourname@gmail.com">
+        </div>
+        
+        <div class="formele">
+            <label for="phone">Telephone</label>
+            <input type="text" name="phone" id="phone" placeholder="Eg. 0123456789">
+        </div> 
+
+        <div class="formele">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+        </div>
+        
+        <div class="formele">
+                <label for="passwordConfirm">Confirm Password</label>
+                <input type="password" name="passwordConfirm" id="passwordConfirm">
+        </div> 
+
+        <div class="formele">
+            <input type="submit" id="submitButton" value="Sign Up">
+        </div>
+
+    </div>
+    <script>
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                return regex.test(email);
+        }
+
+        $("#submitButton").click(function(){
+            var errorMessage = "";
+            var fieldMission = "";
+
+            if($("#email").val() == ""){
+                fieldMission += "<br>Email";
+            }
+            if($("#phone").val() == ""){
+                fieldMission += "<br>Telephone";
+            }
+            if($("#password").val() == ""){
+                fieldMission += "<br>Password";
+            }
+            if($("#passordConfirm").val() == ""){
+                fieldMission += "<br>Confirm Passowrd";
+            }
+
+            if(fieldMission != ""){
+                errorMessage += "The following field(s) are missing" + fieldMission;
+            }
+
+            if(isEmail($("#email").val()) == false){
+                errorMessage += "Your email address is not valid";
+            }
+            if($.isNumeric($("#phone").val()) == false){
+                errorMessage += "Your phone numeber is not numeric";
+            }
+            if($("#password").val() != $("#passwordConfirm").val()){
+                errorMessage += "Your password doesn't match";
+            }
+            alert(errorMessage);
+        });
+    </script>
+</body>
+</html>
